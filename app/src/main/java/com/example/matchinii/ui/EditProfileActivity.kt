@@ -11,7 +11,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.matchinii.R
 import com.example.matchinii.models.User
@@ -23,6 +22,12 @@ import retrofit2.Callback
 import retrofit2.Response
 lateinit var LastName: TextInputEditText
 lateinit var LastNameLayout: TextInputLayout
+lateinit var School: TextInputEditText
+lateinit var SchoolLayout: TextInputLayout
+lateinit var Aboutyou: TextInputEditText
+lateinit var AboutyouLayout: TextInputLayout
+lateinit var Job: TextInputEditText
+lateinit var jobLayout: TextInputLayout
 lateinit var FirstName: TextInputEditText
 lateinit var FirstNameLayout: TextInputLayout
 lateinit var age: TextInputEditText
@@ -31,8 +36,8 @@ lateinit var phone: TextInputEditText
 lateinit var phoneLayout: TextInputLayout
 lateinit var btnNext: Button
 lateinit var Profile: ImageView
-lateinit var btnMale: ImageButton
-lateinit var btnFemale: ImageButton
+lateinit var btnMale: Button
+lateinit var btnFemale: Button
 private var loginIntent3 : String? = null
 
 lateinit var sexe : String
@@ -43,41 +48,52 @@ class EditProfileActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 selectedImageUri = result.data!!.data
-                Profile!!.setImageURI(selectedImageUri)
+                Profile.setImageURI(selectedImageUri)
             }
         }
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
-        LastName = findViewById(R.id.EditTextLastName)
-        LastNameLayout = findViewById(R.id.TextInputLayoutLastName)
-        FirstName = findViewById(R.id.EditLayoutFirstName)
-        FirstNameLayout = findViewById(R.id.TextInputLayoutFirstName)
-        age = findViewById(R.id.EditTextAge)
-        ageLayout = findViewById(R.id.TextInputLayoutAge)
-        phone = findViewById(R.id.EditTextPhone)
-        phoneLayout = findViewById(R.id.TextInputLayoutNumber)
+
+
+        LastName = findViewById(R.id.Elastname)
+        LastNameLayout = findViewById(R.id.inpoutLastName)
+        FirstName = findViewById(R.id.EFirstName)
+        FirstNameLayout = findViewById(R.id.inpoutFirstName)
+        School = findViewById(R.id.Eschool)
+        SchoolLayout = findViewById(R.id.inpoutschool)
+        Aboutyou = findViewById(R.id.EAbout)
+        AboutyouLayout = findViewById(R.id.inpoutAbout)
+        Job = findViewById(R.id.EJobTile)
+        jobLayout = findViewById(R.id.inpoutJobTile)
+        age = findViewById(R.id.EAge)
+        ageLayout = findViewById(R.id.inpoutAge)
+        phone = findViewById(R.id.EPhone)
+        phoneLayout = findViewById(R.id.inpoutPhone)
         btnNext = findViewById(R.id.Save)
-        Profile = findViewById(R.id.profilepic)
-       btnMale = findViewById(R.id.Male)
-        btnFemale = findViewById(R.id.Female)
+        Profile = findViewById(R.id.image_view_1)
+
+        btnMale = findViewById(R.id.woman_button)
+        btnFemale = findViewById(R.id.man_button)
 
         btnMale.setOnClickListener(){
-            sexe = "male"
-           Toast.makeText(this,"male",Toast.LENGTH_LONG).show()
+            sexe = "Woman"
+            Toast.makeText(this,"Woman",Toast.LENGTH_LONG).show()
             btnMale.setBackgroundColor(Color.GRAY);
         }
         btnFemale.setOnClickListener(){
-            sexe = "female"
-            Toast.makeText(this,"female",Toast.LENGTH_LONG).show()
+            sexe = "man"
+            Toast.makeText(this,"man",Toast.LENGTH_LONG).show()
             btnFemale.setBackgroundColor(Color.GRAY);
         }
-        Profile!!.setOnClickListener{
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intent.type = "image/*"
-            startForResultOpenGallery.launch(intent)
-            Log.e("image", selectedImageUri.toString())
+        Profile.setOnClickListener(){
+            Profile!!.setOnClickListener{
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+                intent.type = "image/*"
+                startForResultOpenGallery.launch(intent)
+                Log.e("image", selectedImageUri.toString())
+            }
+
         }
         loginIntent3 = intent!!.getStringExtra("login" )
         var services = ApiInterface.create()
@@ -88,6 +104,9 @@ class EditProfileActivity : AppCompatActivity() {
             map["LasteName"] = LastName.text.toString()
             map["Age"] = age.text.toString()
             map["Numero"] = phone.text.toString()
+            map["AboutYou"] = Aboutyou.text.toString()
+            map["School"] = School.text.toString()
+            map["Job"] = Job.text.toString()
             map["Sexe"] = sexe
             map["Image"] = selectedImageUri.toString()
             Log.e("intent3" ,loginIntent3.toString())
@@ -114,6 +133,7 @@ class EditProfileActivity : AppCompatActivity() {
                         Toast.makeText(this@EditProfileActivity, " Success", Toast.LENGTH_SHORT)
                             .show()
                         startActivity (Intent(this@EditProfileActivity, ProfileActivity::class.java).apply {
+                            putExtra("login1" ,loginIntent3.toString())
                             putExtra("name" , FirstName.text.toString() )
                             putExtra("age" , age.text.toString())
                         putExtra("image" , selectedImageUri.toString())

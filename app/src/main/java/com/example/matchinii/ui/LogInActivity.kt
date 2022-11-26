@@ -67,8 +67,8 @@ class LogInActivity : AppCompatActivity() {
         if (mSharedPref.getBoolean("IS_REMEMBRED", false) ){
                 Log.e("hhhhhhhhhh",mSharedPref.getBoolean("IS_REMEMBRED", false).toString())
             startActivity(Intent(this , HomeActivity::class.java).apply {
+                putExtra("login", txtLoginin.text.toString())
             })
-
         }
         toSignUp.setOnClickListener(){
             startActivity(Intent(this@LogInActivity, SecondActivity::class.java))
@@ -97,7 +97,6 @@ class LogInActivity : AppCompatActivity() {
                 services.login(map).enqueue(object : Callback<User> {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
                         val user = response.body()
-
                         if (remember.isChecked) {
                             mSharedPref.edit().apply {
                                 putBoolean("IS_REMEMBRED", true)

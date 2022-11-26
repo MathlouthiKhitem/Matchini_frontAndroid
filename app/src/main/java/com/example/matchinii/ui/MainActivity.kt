@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
 
-        }, 3000) // 3000 is the delayed time in milliseconds.
+        }, 3000)
     }
 
 }

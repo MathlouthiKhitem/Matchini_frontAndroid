@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
-        android:background="#FF5252"
-        app:backgroundTint="#FF5252" />
+        android:background="#FA7F80"
+        app:backgroundTint="#FA7F80" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

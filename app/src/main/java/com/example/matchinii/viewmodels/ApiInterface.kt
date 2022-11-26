@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
@@ -13,6 +14,7 @@ interface ApiInterface {
 //
 //    @POST("login")
 //    fun seConnecter(@Body map: HashMap<String ,String>):Call<User>
+
    @POST("/user/login")
   fun login(@Body map: HashMap<String ,String>):Call<User>
     @POST("/user/signup")
@@ -31,15 +33,20 @@ interface ApiInterface {
     fun forgotPassword(@Body map: HashMap<String, String>):Call<data>
     @PUT("/user/restorPassword")
     fun restorPassword(@Body map: HashMap<String, String>):Call<User>
+    @POST("/user/getUser")
+    fun getUser(@Body map: HashMap<String, String>):Call<ArrayList<User>>
+    @POST("/user/getConnectedUser")
+    fun getConnectedUser(@Body map: HashMap<String, String>):Call<ArrayList<User>>
+    @POST("/user/getObjectId")
+    fun getObjectId(@Body map: HashMap<String, String>):Call<data>
+    @PUT("/user/addMatches")
+    fun addMatches(@Body map: HashMap<String, String>):Call<User>
     companion object {
-
         fun create() : ApiInterface {
-
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("http://10.0.2.2:9090")
                 .build()
-
             return retrofit.create(ApiInterface::class.java)
         }
         }

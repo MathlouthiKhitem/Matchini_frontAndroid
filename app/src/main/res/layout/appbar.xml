@@ -10,6 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#FF5252"
+        app:backgroundTint="#FA7F80"
         app:menu="@menu/items" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

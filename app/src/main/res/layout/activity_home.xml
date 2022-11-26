@@ -4,52 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/brown_and_white__modern_travel_app_user_interface__2_"
     tools:context=".ui.HomeActivity">
 
-    <include layout="@layout/appbar"
-        />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="274dp"
-        android:layout_height="117dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="28dp"
-        android:text="@string/textview"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+    <include
+        android:id="@+id/include2"
+        layout="@layout/appbar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="260dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="392dp"
-        android:text="@string/textview1"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="402dp"
+        android:layout_height="674dp"
+        android:layout_marginBottom="60dp"
+        android:contentDescription="@string/email"
+        app:layout_constraintBottom_toBottomOf="@+id/include2"
+        app:layout_constraintEnd_toEndOf="@+id/include2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="137dp"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="181dp"
-        android:layout_marginBottom="259dp"
-        android:text="@string/logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+    </androidx.viewpager.widget.ViewPager>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
