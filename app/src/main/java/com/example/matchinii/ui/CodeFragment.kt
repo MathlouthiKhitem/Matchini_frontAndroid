@@ -51,6 +51,7 @@ class CodeFragment : Fragment() {
         val bundle = arguments
         val code =  bundle!!.getString("code")
         val login =  bundle!!.getString("login")
+
           button = view.findViewById(R.id.button)
         codeEdit =view. findViewById(R.id.ancientPasswordEditText)
         codeLayout =view. findViewById(R.id.ancientPasswordLayout)

@@ -38,8 +38,7 @@ class ChatActivity : AppCompatActivity() {
                     userList.addAll(user)
                     Log.e("yoyoyoyoyoy" ,  userList.toString())
                     recylcerViewAdapter = RecyclerAdapter(userList)
-                    recyclerView.adapter = recylcerViewAdapter
-                    recyclerView.layoutManager = LinearLayoutManager(this@ChatActivity, LinearLayoutManager.HORIZONTAL ,false)
+
                 }
             }
             override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {

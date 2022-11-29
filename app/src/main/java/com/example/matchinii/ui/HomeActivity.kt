@@ -61,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
         imageIntent = intent.getStringExtra("image")
         // editProfile = findViewById(R.id.floatingActionButton)
         //    editProfile.setOnClickListener(){}
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+      /*  viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
@@ -114,7 +114,7 @@ class HomeActivity : AppCompatActivity() {
             override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
                 Toast.makeText(this@HomeActivity, "Connexion error!", Toast.LENGTH_SHORT).show()
             }
-        })
+        })*/
 
 
 
@@ -146,7 +146,8 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.messages -> {
-                    startActivity(Intent(this@HomeActivity, ChatActivity::class.java))
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, ChatFragment())
+                        .commit()
                     true
                 }
                 R.id.search -> {
@@ -164,9 +165,9 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-    private fun getItem(i : Int ): Int {
+   /* private fun getItem(i : Int ): Int {
         return viewPager.currentItem +i ;
-    }
+    }*/
     abstract class DoubleClickListener : View.OnClickListener {
         var lastClickTime: Long = 0
         override fun onClick(v: View?) {

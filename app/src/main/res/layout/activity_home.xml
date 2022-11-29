@@ -15,7 +15,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.matchinii.ui.ChatFragment"
+        android:layout_width="389dp"
+        android:layout_height="635dp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include2" />
+
+  <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="402dp"
         android:layout_height="674dp"
