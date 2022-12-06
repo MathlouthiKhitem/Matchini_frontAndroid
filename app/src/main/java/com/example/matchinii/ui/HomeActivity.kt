@@ -2,28 +2,21 @@ package com.example.matchinii.ui
 
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-
 import com.example.matchinii.R
 import com.example.matchinii.models.User
 import com.example.matchinii.viewmodels.ApiInterface
 import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.card_item.*
-import kotlinx.android.synthetic.main.card_item.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 
 lateinit var login : TextView
@@ -35,13 +28,13 @@ private var imageIntent: String? = null
 private var ageIntent: String? = null
 lateinit var  myUserList : ArrayList<User>
 
-
-
+var currentPosition : Int? = 0 ;
 //private var loginin : String? = ""
 //private var password : String? = ""
 //private var lastname: String? = ""
 //private var numero : String? = ""
 private var firstName : String? = ""
+private var firstName1 : String? = ""
 //private var sexein : String? = ""
 private var Age :Int =0
 private var image :String = ""
@@ -54,11 +47,17 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         appbar = findViewById(R.id.bottomAppBar2)
+
        // myCard = findViewById(R.id.cardview)
         //  logout = findViewById(R.id.logout)
         loginIntent = intent.getStringExtra("login")
+        firstName = intent.getStringExtra("firstName")
+        val substring = loginIntent!!.substringBefore("@")
+
+        val s = intent.getStringExtra("value")
         ageIntent = intent.getStringExtra("age")
         imageIntent = intent.getStringExtra("image")
+
         // editProfile = findViewById(R.id.floatingActionButton)
         //    editProfile.setOnClickListener(){}
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
@@ -66,21 +65,42 @@ class HomeActivity : AppCompatActivity() {
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {
-                if(viewPager.currentItem == 0) {
-
+            ) { if(currentPosition!! < position) {
+                        // handle swipe LEFT
+                    } else if( currentPosition!! > position){
+                        val myAdapter = MyAdapter(this@HomeActivity, myUserList)
+                        myAdapter.removeItem(currentPosition!! -1);
+                        viewPager.adapter = myAdapter;
+                    }
+                    currentPosition = position; // Update current position
                 }
-            }
+
+
 
             override fun onPageSelected(position: Int) {
+
 
             }
 
             override fun onPageScrollStateChanged(state: Int) {
+                when (state) {
+                    ViewPager.SCROLL_STATE_DRAGGING -> {}
+                    ViewPager.SCROLL_STATE_IDLE -> {
+                    }
+                    ViewPager.SCROLL_INDICATOR_LEFT-> {Log.e("---------", currentPosition.toString())
+
+                        var previousPosition = currentPosition!! - 1
+                        if (previousPosition < 0) {
+                            previousPosition = 0
+                        }
+                       }
+                    ViewPager.SCROLL_STATE_SETTLING -> {}
+                }
 
             }
 
         })
+
         val map: HashMap<String, String> = HashMap()
         map["login"] = loginIntent.toString()
 
@@ -103,8 +123,6 @@ class HomeActivity : AppCompatActivity() {
                     Log.e("taille de docs  ",user!!.indices.toString())
                         Log.e("size de list = ", myUserList.size.toString())
                         viewPager.adapter = myAdapter
-
-
                 }
                 if (user != null) {
 
@@ -115,25 +133,6 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this@HomeActivity, "Connexion error!", Toast.LENGTH_SHORT).show()
             }
         })
-
-
-
-           // myUserList = ArrayList()
-    //    Log.e("hererererer", firstName.toString())
-     //  Log.e("hererererer", image.toString())
-     //   myUserList.add(User("" ,"", firstName!!, "", Age as Int , "","" , image ))
-       //  val  myAdapter = MyAdapter(this , myUserList)
-
-      //  Log.e("here", myUserList.toString())
-        //    viewPager.adapter = myAdapter
-        //    mSharedPref = getSharedPreferences("PREF_NAME", MODE_PRIVATE);
-    //    login.text= mSharedPref.getString("login","").toString()
-   //     pwd.text = mSharedPref.getString("password","").toString()
-       // logout.setOnClickListener() {
-        //    getSharedPreferences("PREF_NAME", MODE_PRIVATE).edit().clear().apply()
-       //     finish()
-       //     startActivity(Intent(this@HomeActivity, LogInActivity::class.java))
-    //    }
         appbar!!.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.profile -> {
@@ -146,7 +145,13 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.messages -> {
-                    startActivity(Intent(this@HomeActivity, ChatActivity::class.java))
+                    startActivity(Intent(this@HomeActivity, ChatRoomActivity::class.java).apply {
+                       putExtra("login1" , loginIntent)
+                        putExtra("firstName" , substring)
+                        putExtra("value",s)
+                        Log.e("value",s.toString())
+
+                    })
                     true
                 }
                 R.id.search -> {
@@ -183,4 +188,6 @@ class HomeActivity : AppCompatActivity() {
             private const val DOUBLE_CLICK_TIME_DELTA: Long = 300 //milliseconds
         }
     }
+
+
 }

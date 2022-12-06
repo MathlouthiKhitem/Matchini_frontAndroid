@@ -1,9 +1,10 @@
 package com.example.matchinii.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.matchinii.R
@@ -15,37 +16,42 @@ import retrofit2.Callback
 import retrofit2.Response
 private var firstName :String = ""
 private var image :String = ""
+lateinit var  UserList : ArrayList<User>
+private var laoutmanager : RecyclerView.LayoutManager?=null
+private  var adapterrecycler : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>?=null
 class ChatActivity : AppCompatActivity() {
-    lateinit var recylcerViewAdapter: RecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-
-      val   loginIntent = intent.getStringExtra("login")
         val map: HashMap<String, String> = HashMap()
-        var userList : MutableList<User> = ArrayList()
-        map["login"] = loginIntent.toString()
+        var loginIntent= intent.getStringExtra("login" )
+        laoutmanager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL ,false)
 
+        map["login"] = loginIntent.toString()
+        Log.e("login chat",loginIntent.toString())
         apiservice.getUser(map).enqueue(object : Callback<ArrayList<User>> {
+            @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
                 call: Call<ArrayList<User>>,
                 response: Response<ArrayList<User>>
             ) { val user = response.body()
                 for( i in user!!.indices ) {
                     firstName = user?.get(i)?.FirstName.toString()
-                   image = user?.get(i)?.Image.toString()
-                   userList = ArrayList()
-                    userList.addAll(user)
-                    Log.e("yoyoyoyoyoy" ,  userList.toString())
-                    recylcerViewAdapter = RecyclerAdapter(userList)
-                    recyclerView.adapter = recylcerViewAdapter
-                    recyclerView.layoutManager = LinearLayoutManager(this@ChatActivity, LinearLayoutManager.HORIZONTAL ,false)
+                    image = user?.get(i)?.Image.toString()
+                  UserList = ArrayList()
+                    UserList.addAll(user)
+                    Log.e("iiiiiiiii", firstName)
+                    recyclerView1.layoutManager = laoutmanager
+                    adapterrecycler = RecyclerAdapter(UserList)
+                    recyclerView1.adapter= adapterrecycler
+                    }
+                if (user != null) {
+                } else {
                 }
             }
             override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
-               Log.e("yoyoyoy" , "Failure")
+                Toast.makeText(this@ChatActivity, "Connexion error!", Toast.LENGTH_SHORT).show()
             }
         })
-
     }
 }

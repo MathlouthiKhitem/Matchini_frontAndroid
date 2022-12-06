@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.matchinii.R
 
 class ViewHodler (itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val userPic : ImageView
-        val userName : TextView
-        init {
-            userPic = itemView.findViewById<ImageView>(R.id.imageView3)
-            userName = itemView.findViewById<TextView>(R.id.textView2)
-        }
+    var itemImage: ImageView
+    var itemName: TextView
+
+    init {
+        itemImage = itemView.findViewById<ImageView>(R.id.userProfileImage)
+        itemName = itemView.findViewById<TextView>(R.id.textView9)
     }
+}
