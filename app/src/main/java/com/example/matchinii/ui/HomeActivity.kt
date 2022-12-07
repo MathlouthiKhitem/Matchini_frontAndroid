@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.matchinii.R
 import com.example.matchinii.models.User
+import com.example.matchinii.models.data
 import com.example.matchinii.viewmodels.ApiInterface
 import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_home.*
@@ -35,6 +36,9 @@ var currentPosition : Int? = 0 ;
 //private var numero : String? = ""
 private var firstName : String? = ""
 private var firstName1 : String? = ""
+private var id1 : String? = ""
+private var id2 : String? = ""
+private  var idFinal: String? =""
 //private var sexein : String? = ""
 private var Age :Int =0
 private var image :String = ""
@@ -52,8 +56,10 @@ class HomeActivity : AppCompatActivity() {
         //  logout = findViewById(R.id.logout)
         loginIntent = intent.getStringExtra("login")
         firstName = intent.getStringExtra("firstName")
-        val substring = loginIntent!!.substringBefore("@")
 
+
+        val substring = loginIntent!!.substringBefore("@")
+        idFinal= id1+ id2
         val s = intent.getStringExtra("value")
         ageIntent = intent.getStringExtra("age")
         imageIntent = intent.getStringExtra("image")
@@ -121,6 +127,7 @@ class HomeActivity : AppCompatActivity() {
                     Log.e("i =  ", i.toString())
                            Log.e("contenu de liste =  ", myUserList.toString())
                     Log.e("taille de docs  ",user!!.indices.toString())
+                   Log.e("id final", idFinal.toString())
                         Log.e("size de list = ", myUserList.size.toString())
                         viewPager.adapter = myAdapter
                 }
@@ -145,11 +152,17 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.messages -> {
+
                     startActivity(Intent(this@HomeActivity, ChatRoomActivity::class.java).apply {
-                       putExtra("login1" , loginIntent)
-                        putExtra("firstName" , substring)
-                        putExtra("value",s)
-                        Log.e("value",s.toString())
+                         putExtra("login1" , loginIntent)
+                         putExtra("firstName" , substring)
+                         putExtra("id final", idFinal.toString())
+                        id1 = intent.getStringExtra("id1intent")
+                        id2 = intent.getStringExtra("id2intent")
+                        Log.e("id1intent",id1.toString())
+                        Log.e("id2intent",id2.toString())
+                        Log.e("id final", idFinal.toString())
+
 
                     })
                     true

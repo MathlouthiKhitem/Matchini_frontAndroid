@@ -37,7 +37,6 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
     val chatList: ArrayList<Message> = arrayListOf();
     lateinit var chatRoomAdapter: ChatRoomAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)

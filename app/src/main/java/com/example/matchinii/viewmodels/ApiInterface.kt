@@ -41,8 +41,8 @@ interface ApiInterface {
     fun getUser(@Body map: HashMap<String, String>):Call<ArrayList<User>>
     @POST("/user/getConnectedUser")
     fun getConnectedUser(@Body map: HashMap<String, String>):Call<ArrayList<User>>
-    @POST("/user/getObjectId")
-    fun getObjectId(@Body map: HashMap<String, String>):Call<data>
+    @POST("/user/getObjectId/{login}")
+    fun getObjectId(@Body map: HashMap<String, String> ,@Path("login") login:String ):Call<ArrayList<data>>
     @POST("/user/IsMatched/{login}")
     fun IsMatched(@Path("login") login:String , @Body map: HashMap<String, String>):Call<bool>
     @PUT("/user/addMatches2/{login}")
@@ -51,11 +51,13 @@ interface ApiInterface {
     fun addMatches(@Body map: HashMap<String, String>):Call<User>
     @PUT("/user/chatconecte")
     fun chatconecte(@Body map: HashMap<String, String>):Call<User>
+    @POST("/matche/matches/{User1_param}/{User2_param}")
+    fun matches(@Path("User1_param") User1_param:String,@Path("User2_param") User2_param:String):Call<User>
     companion object {
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://10.0.2.2:9090")
+                .baseUrl("http://192.168.1.14:9090")
                 .build()
             return retrofit.create(ApiInterface::class.java)
         }
