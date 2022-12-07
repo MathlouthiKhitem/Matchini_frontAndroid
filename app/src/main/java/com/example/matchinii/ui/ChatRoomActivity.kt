@@ -57,8 +57,8 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
             e.printStackTrace()
         }*/
 
-    userName = intent.getStringExtra("firstName")!!
-    user.setText(userName)
+        userName = intent.getStringExtra("login")!!
+         user.setText(userName)
         Log.e("chatRomme",userName)
         roomName="matched"
 
@@ -70,7 +70,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
-        //Let's connect to our Chat room! :D
+
         try {
             mSocket = IO.socket("http://10.0.2.2:3000")
             Log.d("success", mSocket.id())

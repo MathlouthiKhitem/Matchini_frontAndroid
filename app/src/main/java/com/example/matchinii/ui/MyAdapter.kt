@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.startActivity
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.example.matchinii.R
@@ -24,6 +25,9 @@ import java.net.URL
 
 
 class MyAdapter(private val context: HomeActivity, private val myUserArray: ArrayList<User> ) :PagerAdapter() {
+    val intent = Intent(context, HomeActivity::class.java)
+
+
 
     lateinit var userName1: String;
     override fun getCount(): Int {
@@ -32,6 +36,7 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
        }
+
     @SuppressLint("SuspiciousIndentation")
     @RequiresApi(Build.VERSION_CODES.P)
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -47,8 +52,11 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
         view.textView3.text = age.toString();
         view.textView8.text = firstname
           Glide.with(context).load(image).into(view.cardimage)
+
         view.setOnClickListener(object : HomeActivity.DoubleClickListener() {
+
             override fun onDoubleClick(v: View?) {
+
                 view.isClickable = false
               var loginIntent= context.intent.getStringExtra("login" )
                 var apiservicTest = ApiInterface.create()
@@ -56,20 +64,31 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
                 Handler().postDelayed({like.visibility =View.INVISIBLE }, 1000)
                 val map2: HashMap<String, String> = HashMap()
                 map2["login"] = loginIntent.toString()
-                apiservicTest.getObjectId(map2, model.login ).enqueue(object : Callback<ArrayList<data>>{
+                 apiservicTest.getObjectId(map2, model.login ).enqueue(object : Callback<ArrayList<data>>{
                     override fun onResponse(
                         call: Call<ArrayList<data>>,
                         response: Response<ArrayList<data>>
-                    ) {
+                     ) {
                         val id = response.body()
                         if (id != null) {
-                                val id1 = response.body()?.get(0)?.value
-                                val id2 = response.body()?.get(1)?.value
-                            val intent = Intent(context, HomeActivity::class.java)
-                            intent.putExtra("id1intent",id1)
-                            intent.putExtra("id1intent",id2)
-                      //      context.intent.putExtra("id1intent",id1)
-                           // context.intent.putExtra("id2intent",id2)
+                            val id1 = response.body()?.get(0)?.value
+                            val id2 = response.body()?.get(1)?.value
+//                            val intent = Intent(context, HomeActivity::class.java)
+//                            intent.putExtra("id1intent",id1)
+//                            intent.putExtra("id1intent",id2)
+                            //      context.intent.putExtra("id1intent",id1)
+                            // context.intent.putExtra("id2intent",id2)
+//                            val intent = Intent(context, HomeActivity::class.java)
+//                            intent.putExtra("id1intent", id1)
+//                           startActivity(intent)
+
+                            intent.apply {
+                                putExtra("id1intent", id1)
+                                putExtra("id2intent", id2)
+
+                            }
+
+
                                 Log.e("id1 =  ", id1.toString())
                                 Log.e("id2 = ", id2.toString())
                             apiservicTest.matches(id1!! , id2!!).enqueue(object : Callback<User>{
@@ -78,8 +97,8 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
                                     response: Response<User>
                                 ) {
                                     println("success")
-                                }
 
+                                }
                                 override fun onFailure(call: Call<User>, t: Throwable) {
                                    println("fail")
                                 }
@@ -95,6 +114,8 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
                     }
 
                 })
+
+
 //                apiservicTest.IsMatched(loginIntent.toString(),map2)
 //                    .enqueue(object : Callback<bool>{
 //                        override fun onResponse(
@@ -134,11 +155,13 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
 
             }
 
+
         })
 
         container.addView(view , position)
         return  view
     }
+
 
 
 
@@ -153,6 +176,7 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
         }
 
 }
+
 }
 
 
