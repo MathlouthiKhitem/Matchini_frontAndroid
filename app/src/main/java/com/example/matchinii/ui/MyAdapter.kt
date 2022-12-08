@@ -52,11 +52,8 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
         view.textView3.text = age.toString();
         view.textView8.text = firstname
           Glide.with(context).load(image).into(view.cardimage)
-
         view.setOnClickListener(object : HomeActivity.DoubleClickListener() {
-
             override fun onDoubleClick(v: View?) {
-
                 view.isClickable = false
               var loginIntent= context.intent.getStringExtra("login" )
                 var apiservicTest = ApiInterface.create()
@@ -93,6 +90,7 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
                                 Log.e("id2 = ", id2.toString())
                             apiservicTest.matches(id1!! , id2!!).enqueue(object : Callback<User>{
                                 override fun onResponse(
+
                                     call: Call<User>,
                                     response: Response<User>
                                 ) {

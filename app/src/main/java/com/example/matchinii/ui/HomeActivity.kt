@@ -109,7 +109,7 @@ class HomeActivity : AppCompatActivity() {
                     image = user?.get(i)?.Image.toString()
                     myUserList = ArrayList()
                    myUserList.addAll(user)
-                           val myAdapter = MyAdapter(
+                   val myAdapter = MyAdapter(
                         this@HomeActivity, myUserList)
                         viewPager.adapter = myAdapter
                 }
@@ -134,11 +134,11 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.messages -> {
-                    startActivity(Intent(this@HomeActivity, ChatRoomActivity::class.java).apply {
-                         putExtra("login" , loginIntent)
-                         putExtra("id final", idFinal.toString())
+                    startActivity(Intent(this@HomeActivity, ChatActivity::class.java).apply {
+                       putExtra("login" , loginIntent)
+                      /*   putExtra("id final", idFinal.toString())
                         Log.e("id1intent",id1.toString())
-                        Log.e("id2intent",id2.toString())
+                        Log.e("id2intent",id2.toString())*/
 
                     })
                     true

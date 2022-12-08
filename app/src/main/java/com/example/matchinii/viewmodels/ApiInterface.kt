@@ -53,6 +53,10 @@ interface ApiInterface {
     fun chatconecte(@Body map: HashMap<String, String>):Call<User>
     @POST("/matche/matches/{User1_param}/{User2_param}")
     fun matches(@Path("User1_param") User1_param:String,@Path("User2_param") User2_param:String):Call<User>
+    @POST("/matche/amie/{userid}")
+    fun amie (@Path("userid") userid:String ):Call<ArrayList<User>>
+    @PUT("/user/getId")
+    fun getId (@Body map: HashMap<String, String> ):Call<data>
     companion object {
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
