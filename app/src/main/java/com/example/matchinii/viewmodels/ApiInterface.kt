@@ -57,6 +57,8 @@ interface ApiInterface {
     fun amie (@Path("userid") userid:String ):Call<ArrayList<User>>
     @PUT("/user/getId")
     fun getId (@Body map: HashMap<String, String> ):Call<data>
+    @POST("/matche/rome/{User1_param1}/{User2_param2}")
+    fun rome(@Path("User1_param1") User1_param1:String,@Path("User2_param2") User2_param2:String):Call<String>
     companion object {
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()

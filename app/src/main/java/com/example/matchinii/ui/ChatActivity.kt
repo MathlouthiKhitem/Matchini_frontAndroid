@@ -1,6 +1,7 @@
 package com.example.matchinii.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -50,7 +51,7 @@ class ChatActivity : AppCompatActivity() {
                             UserList.addAll(user)
                             Log.e("iiiiiiiii", response.body().toString())
                             recyclerView1.layoutManager = laoutmanager
-                            adapterrecycler = RecyclerAdapter(UserList)
+                            adapterrecycler = RecyclerAdapter(UserList , Intent(this@ChatActivity, RecyclerAdapter::class.java).putExtra("login" , loginIntent))
                             recyclerView1.adapter= adapterrecycler
                     }}
                     override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {

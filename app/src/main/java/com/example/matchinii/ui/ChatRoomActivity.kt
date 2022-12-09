@@ -57,11 +57,11 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
             e.printStackTrace()
         }*/
 
-        userName = intent.getStringExtra("login")!!
+        userName = intent.getStringExtra("name")!!
          user.setText(userName)
-        Log.e("chatRomme",userName)
-        roomName="matched"
-
+        roomName=intent.getStringExtra("romee")!!
+        Log.e("namechat",userName)
+        Log.e("roomName",roomName)
         //Set Chatroom adapter
 
         chatRoomAdapter = ChatRoomAdapter(this, chatList);
