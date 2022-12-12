@@ -22,10 +22,8 @@ interface ApiInterface {
    @Multipart
    @POST("/user/signup")
    //fun register(@Body map: HashMap<String ,String>):Call<User>
-
    fun register(@Part login : MultipartBody.Part,@Part password : MultipartBody.Part ,@Part Age: MultipartBody.Part,@Part Image:MultipartBody.Part ,@Part("Image") name : RequestBody) :Call<User>
-    fun updatePassword (@Body map: HashMap<String ,String>):Call<User>
-    @POST("/user/googleVerifier")
+     @POST("/user/googleVerifier")
     fun googleVerifier(@Body  map: HashMap<String ,String>):Call<User>
     @POST("/user/googleSignIn")
     fun googleSignIn(@Body map: HashMap<String ,String>):Call<User>
@@ -59,6 +57,14 @@ interface ApiInterface {
     fun getId (@Body map: HashMap<String, String> ):Call<data>
     @POST("/matche/rome/{User1_param1}/{User2_param2}")
     fun rome(@Path("User1_param1") User1_param1:String,@Path("User2_param2") User2_param2:String):Call<String>
+    @PUT("/user/addAgePref")
+    fun addAgePref(@Body map: HashMap<String, String>):Call<User>
+    @PUT("/user/DeleteAcc/{login}")
+     fun deleteAcc(@Path("login") login:String ):Call<User>
+    @POST("/user/getOne")
+    fun getOne(@Body map: HashMap<String, String>):Call<User>
+// @POST("/Message/addmessage")
+// fun addmessage(@Body map: HashMap<String, String>):Call<User>
     companion object {
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()

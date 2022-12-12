@@ -64,6 +64,9 @@ class RecyclerAdapter (private val UserList: ArrayList<User> , private val inten
                                intent.apply {
                                    putExtra("romee", response.body())
                                    putExtra("name", login.toString())
+                                   putExtra("Image",image)
+                                   putExtra("id1",id1)
+                                   putExtra("id2",id2)
                                    Log.e("romee", response.body().toString())
                                    Log.e("name", login.toString())
                                }
@@ -77,7 +80,6 @@ class RecyclerAdapter (private val UserList: ArrayList<User> , private val inten
                        })
                }
                }
-
                override fun onFailure(call: Call<ArrayList<data>>, t: Throwable) {
                   println("ghn")
                }
@@ -86,7 +88,7 @@ class RecyclerAdapter (private val UserList: ArrayList<User> , private val inten
         }
         Glide.with(holder.itemImage.context).load(image).into(holder.itemImage)
         Log.e("tttttttt" , UserList.toString())
-//        Log.e("tttttttt" , UserList[position].login)
+
     }
     override fun getItemCount(): Int {
        return  UserList.size

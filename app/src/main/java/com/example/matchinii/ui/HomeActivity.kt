@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.matchinii.R
 import com.example.matchinii.models.User
-import com.example.matchinii.models.data
 import com.example.matchinii.viewmodels.ApiInterface
 import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_home.*
@@ -34,7 +33,7 @@ private var firstName : String? = ""
 private var id1 : String? = ""
 private var id2 : String? = ""
 private  var idFinal: String? =""
-private var Age :Int =0
+private var Age :Int ? =0
 private var image :String = ""
 var apiservice= ApiInterface.create()
 private lateinit var mSharedPref: SharedPreferences
@@ -43,13 +42,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         appbar = findViewById(R.id.bottomAppBar2)
-
-       // myCard = findViewById(R.id.cardview)
-        //  logout = findViewById(R.id.logout)
-
         loginIntent = intent.getStringExtra("login")
         Log.e("ooooooooo", loginIntent.toString())
-
         firstName = intent.getStringExtra("firstName")
         id1 = getIntent().getStringExtra("id1intent")
         id2 = intent.getStringExtra("id2intent")
@@ -63,7 +57,6 @@ class HomeActivity : AppCompatActivity() {
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-
             ) { if(currentPosition!! < position) {
                         // handle swipe LEFT
                     } else if( currentPosition!! > position){
@@ -72,7 +65,6 @@ class HomeActivity : AppCompatActivity() {
                         viewPager.adapter = myAdapter;
                     }
                     currentPosition = position;
-
                 }
             override fun onPageSelected(position: Int) {}
             override fun onPageScrollStateChanged(state: Int) {
@@ -91,9 +83,6 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         })
-
-
-
         val map: HashMap<String, String> = HashMap()
         map["login"] = loginIntent.toString()
         Log.e("%%%%%%%%", loginIntent.toString())
@@ -129,7 +118,6 @@ class HomeActivity : AppCompatActivity() {
                         putExtra("login" , loginIntent)
                             putExtra("age" , ageIntent)
                             putExtra("image" , imageIntent)
-
                                })
                     true
                 }
@@ -170,7 +158,6 @@ class HomeActivity : AppCompatActivity() {
             }
             lastClickTime = clickTime
         }
-
         abstract fun onDoubleClick(v: View?)
 
         companion object {

@@ -32,7 +32,7 @@
         android:paddingEnd="10dp"
         android:paddingBottom="5dp"
         android:text="My Name is Joyce"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold" />
 
