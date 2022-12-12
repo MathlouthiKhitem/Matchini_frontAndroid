@@ -73,5 +73,7 @@
     <string name="notification">Notification</string>
     <string name="todoopijhugjkhvj">TODO</string>
     <string name="user_imageitem">user_image</string>
+    <string name="chats">Chats</string>
+    <string name="how_are_you">How are you !</string>
 
 </resources>

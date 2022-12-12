@@ -3,6 +3,7 @@ package com.example.matchinii.ui
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -27,19 +28,13 @@ private var loginIntent: String? = null
 private var imageIntent: String? = null
 private var ageIntent: String? = null
 lateinit var  myUserList : ArrayList<User>
-
 var currentPosition : Int? = 0 ;
-//private var loginin : String? = ""
-//private var password : String? = ""
-//private var lastname: String? = ""
-//private var numero : String? = ""
 private var firstName : String? = ""
-private var firstName1 : String? = ""
-//private var sexein : String? = ""
-private var Age :Int =0
+private var id1 : String? = ""
+private var id2 : String? = ""
+private  var idFinal: String? =""
+private var Age :Int ? =0
 private var image :String = ""
-//private var uri : Uri?= null
-
 var apiservice= ApiInterface.create()
 private lateinit var mSharedPref: SharedPreferences
 class HomeActivity : AppCompatActivity() {
@@ -47,17 +42,14 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         appbar = findViewById(R.id.bottomAppBar2)
-
-       // myCard = findViewById(R.id.cardview)
-        //  logout = findViewById(R.id.logout)
         loginIntent = intent.getStringExtra("login")
+        Log.e("ooooooooo", loginIntent.toString())
         firstName = intent.getStringExtra("firstName")
-        val substring = loginIntent!!.substringBefore("@")
-
+        id1 = getIntent().getStringExtra("id1intent")
+        id2 = intent.getStringExtra("id2intent")
         val s = intent.getStringExtra("value")
         ageIntent = intent.getStringExtra("age")
         imageIntent = intent.getStringExtra("image")
-
         // editProfile = findViewById(R.id.floatingActionButton)
         //    editProfile.setOnClickListener(){}
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
@@ -72,16 +64,9 @@ class HomeActivity : AppCompatActivity() {
                         myAdapter.removeItem(currentPosition!! -1);
                         viewPager.adapter = myAdapter;
                     }
-                    currentPosition = position; // Update current position
+                    currentPosition = position;
                 }
-
-
-
-            override fun onPageSelected(position: Int) {
-
-
-            }
-
+            override fun onPageSelected(position: Int) {}
             override fun onPageScrollStateChanged(state: Int) {
                 when (state) {
                     ViewPager.SCROLL_STATE_DRAGGING -> {}
@@ -96,14 +81,11 @@ class HomeActivity : AppCompatActivity() {
                        }
                     ViewPager.SCROLL_STATE_SETTLING -> {}
                 }
-
             }
-
         })
-
         val map: HashMap<String, String> = HashMap()
         map["login"] = loginIntent.toString()
-
+        Log.e("%%%%%%%%", loginIntent.toString())
         apiservice.getUser(map).enqueue(object : Callback<ArrayList<User>> {
             override fun onResponse(
                 call: Call<ArrayList<User>>,
@@ -116,12 +98,8 @@ class HomeActivity : AppCompatActivity() {
                     image = user?.get(i)?.Image.toString()
                     myUserList = ArrayList()
                    myUserList.addAll(user)
-                           val myAdapter = MyAdapter(
+                   val myAdapter = MyAdapter(
                         this@HomeActivity, myUserList)
-                    Log.e("i =  ", i.toString())
-                           Log.e("contenu de liste =  ", myUserList.toString())
-                    Log.e("taille de docs  ",user!!.indices.toString())
-                        Log.e("size de list = ", myUserList.size.toString())
                         viewPager.adapter = myAdapter
                 }
                 if (user != null) {
@@ -140,16 +118,15 @@ class HomeActivity : AppCompatActivity() {
                         putExtra("login" , loginIntent)
                             putExtra("age" , ageIntent)
                             putExtra("image" , imageIntent)
-
                                })
                     true
                 }
                 R.id.messages -> {
-                    startActivity(Intent(this@HomeActivity, ChatRoomActivity::class.java).apply {
-                       putExtra("login1" , loginIntent)
-                        putExtra("firstName" , substring)
-                        putExtra("value",s)
-                        Log.e("value",s.toString())
+                    startActivity(Intent(this@HomeActivity, ChatActivity::class.java).apply {
+                       putExtra("login" , loginIntent)
+                      /*   putExtra("id final", idFinal.toString())
+                        Log.e("id1intent",id1.toString())
+                        Log.e("id2intent",id2.toString())*/
 
                     })
                     true
@@ -181,7 +158,6 @@ class HomeActivity : AppCompatActivity() {
             }
             lastClickTime = clickTime
         }
-
         abstract fun onDoubleClick(v: View?)
 
         companion object {

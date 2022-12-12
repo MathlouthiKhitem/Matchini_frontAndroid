@@ -22,10 +22,8 @@ interface ApiInterface {
    @Multipart
    @POST("/user/signup")
    //fun register(@Body map: HashMap<String ,String>):Call<User>
-
    fun register(@Part login : MultipartBody.Part,@Part password : MultipartBody.Part ,@Part Age: MultipartBody.Part,@Part Image:MultipartBody.Part ,@Part("Image") name : RequestBody) :Call<User>
-    fun updatePassword (@Body map: HashMap<String ,String>):Call<User>
-    @POST("/user/googleVerifier")
+     @POST("/user/googleVerifier")
     fun googleVerifier(@Body  map: HashMap<String ,String>):Call<User>
     @POST("/user/googleSignIn")
     fun googleSignIn(@Body map: HashMap<String ,String>):Call<User>
@@ -41,8 +39,8 @@ interface ApiInterface {
     fun getUser(@Body map: HashMap<String, String>):Call<ArrayList<User>>
     @POST("/user/getConnectedUser")
     fun getConnectedUser(@Body map: HashMap<String, String>):Call<ArrayList<User>>
-    @POST("/user/getObjectId")
-    fun getObjectId(@Body map: HashMap<String, String>):Call<data>
+    @POST("/user/getObjectId/{login}")
+    fun getObjectId(@Body map: HashMap<String, String> ,@Path("login") login:String ):Call<ArrayList<data>>
     @POST("/user/IsMatched/{login}")
     fun IsMatched(@Path("login") login:String , @Body map: HashMap<String, String>):Call<bool>
     @PUT("/user/addMatches2/{login}")
@@ -51,11 +49,27 @@ interface ApiInterface {
     fun addMatches(@Body map: HashMap<String, String>):Call<User>
     @PUT("/user/chatconecte")
     fun chatconecte(@Body map: HashMap<String, String>):Call<User>
+    @POST("/matche/matches/{User1_param}/{User2_param}")
+    fun matches(@Path("User1_param") User1_param:String,@Path("User2_param") User2_param:String):Call<User>
+    @POST("/matche/amie/{userid}")
+    fun amie (@Path("userid") userid:String ):Call<ArrayList<User>>
+    @PUT("/user/getId")
+    fun getId (@Body map: HashMap<String, String> ):Call<data>
+    @POST("/matche/rome/{User1_param1}/{User2_param2}")
+    fun rome(@Path("User1_param1") User1_param1:String,@Path("User2_param2") User2_param2:String):Call<String>
+    @PUT("/user/addAgePref")
+    fun addAgePref(@Body map: HashMap<String, String>):Call<User>
+    @PUT("/user/DeleteAcc/{login}")
+     fun deleteAcc(@Path("login") login:String ):Call<User>
+    @POST("/user/getOne")
+    fun getOne(@Body map: HashMap<String, String>):Call<User>
+// @POST("/Message/addmessage")
+// fun addmessage(@Body map: HashMap<String, String>):Call<User>
     companion object {
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://10.0.2.2:9090")
+                .baseUrl("http://192.168.1.14:9090")
                 .build()
             return retrofit.create(ApiInterface::class.java)
         }

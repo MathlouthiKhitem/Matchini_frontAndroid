@@ -1,24 +1,33 @@
 package com.example.matchinii.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.matchinii.R
 import com.example.matchinii.models.*
-import com.google.android.material.textfield.TextInputEditText
+import com.example.matchinii.viewmodels.MessagesInterface
 import com.google.gson.Gson
 import io.socket.client.IO
-import kotlinx.android.synthetic.main.activity_chat_room.*
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import kotlinx.android.synthetic.main.activity_chat_room.*
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.card_item.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
 
+   var messages = MessagesInterface.create()
 
     val TAG = ChatRoomActivity::class.java.simpleName
 
@@ -28,15 +37,17 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var mSocket: Socket;
     lateinit var userName: String;
     private lateinit var roomName: String;
-        lateinit var user: TextView
-
+    lateinit var user: TextView
+    private lateinit var imageIntent :String;
+    lateinit var reture: ImageView
     private lateinit var imageuser: ImageView;
+    var id1intent : String? = null
+    var id2intent : String? = null
+    var msg : Message? = null
     val gson: Gson = Gson()
 
-    //For setting the recyclerView.
     val chatList: ArrayList<Message> = arrayListOf();
     lateinit var chatRoomAdapter: ChatRoomAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +59,12 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         send.setOnClickListener(this)
         leave.setOnClickListener(this)
         user = findViewById<TextView>(R.id.partnerName)
-        imageuser=findViewById(R.id.imageusr)
+        imageuser= findViewById(R.id.imageusr)
+        reture=findViewById(R.id.leave)
+        reture.setOnClickListener(){
+            startActivity(Intent(this@ChatRoomActivity, ChatActivity::class.java))
+
+        }
 
         //Get the nickname and roomname from entrance activity.
         /*    try {
@@ -57,21 +73,60 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         } catch (e: Exception) {
             e.printStackTrace()
         }*/
+        var k=intent.getStringExtra("name")!!
+        var name =  k.substringBefore('@')
+        userName = name
+        imageIntent =intent.getStringExtra("Image").toString()
+         id1intent =intent.getStringExtra("id1").toString()
+        id2intent =intent.getStringExtra("id2").toString()
+        Glide.with(applicationContext).load(imageIntent).into(imageusr)
+         user.setText(userName)
+         roomName=intent.getStringExtra("romee")!!
+         val map: HashMap<String, String> = HashMap()
+          map["UserM1"] = id1intent.toString()
+          map["UserM2"] = id2intent.toString()
+          map["RommeName"] = roomName
+         messages.addmessage(id1intent.toString(),map).enqueue(object : Callback<Messages>{
+              override fun onResponse(call: Call<Messages>, response: Response<Messages>) {
+                  Log.e("idintent" , id1intent.toString())
+                  Log.e("idintent" , id2intent.toString())
+              }
+              override fun onFailure(call: Call<Messages>, t: Throwable) {
+                  println("failed")
+              }
+          })
+        roomName=intent.getStringExtra("romee")!!
+          var messages = MessagesInterface.create()
+        val map3: HashMap<String, String> = HashMap()
+        map3["RommeName"] = roomName
+        Log.e("namechat",map3.toString())
+        messages.showmessage(map3).enqueue(object  : Callback<ArrayList<data>>{
+            override fun onResponse(call: Call<ArrayList<data>>, response: Response<ArrayList<data>>) {
+                Log.e("jhgjkjhgbj" , response.body().toString())
+                for( i in response.body()!!.indices) {
+                    if( response.body()!![i].key=="user1"){
+                    msg = Message(userName , response.body()!![i].value , roomName , 1)}
+                    else{
+                        msg = Message(userName , response.body()!![i].value , roomName , 0)
+                    }
+                    chatList.add(msg!!)
+                    Log.e("======1======" ,chatList.toString())
+                    chatRoomAdapter = ChatRoomAdapter(this@ChatRoomActivity, chatList , Intent(this@ChatRoomActivity, ChatRoomAdapter::class.java).putExtra("romee" , roomName));
+                    recyclerView.adapter = chatRoomAdapter;
+                }
+            }
+            override fun onFailure(call: Call<ArrayList<data>>, t: Throwable) {
+                println("failed")
+                Log.e("cause" , t.cause.toString())
+            }
+        })
 
-    userName = intent.getStringExtra("firstName")!!
-    user.setText(userName)
-        Log.e("chatRomme",userName)
-        roomName="matched"
-
-        //Set Chatroom adapter
-
-        chatRoomAdapter = ChatRoomAdapter(this, chatList);
+        Log.e("======2======" ,chatList.toString())
+        chatRoomAdapter = ChatRoomAdapter(this, chatList , Intent(this@ChatRoomActivity, ChatRoomAdapter::class.java).putExtra("romee" , roomName));
         recyclerView.adapter = chatRoomAdapter;
-
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
-        //Let's connect to our Chat room! :D
         try {
             mSocket = IO.socket("http://10.0.2.2:3000")
             Log.d("success", mSocket.id())
@@ -104,7 +159,6 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         val data = initialData(userName, roomName)
         val jsonData = gson.toJson(data)
         mSocket.emit("subscribe", jsonData)
-
     }
 
     var onNewUser = Emitter.Listener {
@@ -123,8 +177,26 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
 
         val message = Message(userName, content, roomName, MessageType.CHAT_MINE.index)
         addItemToRecyclerView(message)
-    }
+        val map: HashMap<String, String> = HashMap()
+        map["UserM1"] = id1intent.toString()
+        map["UserM2"] = id2intent.toString()
+        map["messageUser1"] = content
+        map["RommeName"] = roomName
+        Log.e("id1intent" , id1intent.toString())
+        Log.e("id2intent" , id2intent.toString())
+        Log.e("idintent" , content)
+        messages.addmessage(id1intent.toString(),map).enqueue(object : Callback<Messages>{
+            override fun onResponse(call: Call<Messages>, response: Response<Messages>) {
+                Log.e("idintent" , id1intent.toString())
+                Log.e("idintent" , id2intent.toString())
+                Log.e("idintent" , content)
+            }
+            override fun onFailure(call: Call<Messages>, t: Throwable) {
+                t
+            }
+        })
 
+    }
     private fun addItemToRecyclerView(message: Message) {
 
         //Since this function is inside of the listener,
