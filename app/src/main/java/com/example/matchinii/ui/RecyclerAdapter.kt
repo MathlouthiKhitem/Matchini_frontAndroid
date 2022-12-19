@@ -67,6 +67,7 @@ class RecyclerAdapter (private val UserList: ArrayList<User> , private val inten
                                    putExtra("Image",image)
                                    putExtra("id1",id1)
                                    putExtra("id2",id2)
+                                   putExtra("name",name)
                                    Log.e("romee", response.body().toString())
                                    Log.e("name", login.toString())
                                }

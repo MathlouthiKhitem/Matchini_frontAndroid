@@ -74,8 +74,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
             e.printStackTrace()
         }*/
         var k=intent.getStringExtra("name")!!
-        var name =  k.substringBefore('@')
-        userName = name
+        userName = k
         imageIntent =intent.getStringExtra("Image").toString()
          id1intent =intent.getStringExtra("id1").toString()
         id2intent =intent.getStringExtra("id2").toString()
@@ -110,6 +109,8 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
                     else{
                         msg = Message(userName , response.body()!![i].value , roomName , 0)
                     }
+
+
                     chatList.add(msg!!)
                     Log.e("======1======" ,chatList.toString())
                     chatRoomAdapter = ChatRoomAdapter(this@ChatRoomActivity, chatList , Intent(this@ChatRoomActivity, ChatRoomAdapter::class.java).putExtra("romee" , roomName));
@@ -186,7 +187,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         Log.e("id1intent" , id1intent.toString())
         Log.e("id2intent" , id2intent.toString())
         Log.e("idintent" , content)
-        messages.addmessage(id1intent.toString(),map).enqueue(object : Callback<Messages>{
+        messages.addmessage(id1intent.toString(),roomName,map).enqueue(object : Callback<Messages>{
             override fun onResponse(call: Call<Messages>, response: Response<Messages>) {
                 Log.e("idintent" , id1intent.toString())
                 Log.e("idintent" , id2intent.toString())

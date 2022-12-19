@@ -9,15 +9,15 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface MessagesInterface {
-    @POST("/Message/addmessage/{User1_param1}")
-    fun addmessage(@Path("User1_param1") User1_param1:String, @Body map: HashMap<String, String>): Call<Messages>
+    @POST("/Message/addmessage/{User1_param1}/{RommeName}")
+    fun addmessage(@Path("User1_param1") User1_param1:String, @Path("RommeName") RommeName:String,@Body map: HashMap<String, String>): Call<Messages>
     @POST("/Message/showmessage")
     fun showmessage( @Body map: HashMap<String, String>): Call <ArrayList<data>>
     companion object {
         fun create() : MessagesInterface{
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://192.168.1.44:3000")
+                .baseUrl("http://192.168.1.15:3000")
                 .build()
             return retrofit.create(MessagesInterface::class.java)
         }
