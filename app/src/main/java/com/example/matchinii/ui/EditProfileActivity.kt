@@ -133,7 +133,7 @@ class EditProfileActivity : AppCompatActivity() {
                         Toast.makeText(this@EditProfileActivity, " Success", Toast.LENGTH_SHORT)
                             .show()
                         startActivity (Intent(this@EditProfileActivity, ProfileActivity::class.java).apply {
-                            putExtra("login1" ,loginIntent3.toString())
+                            putExtra("login" ,loginIntent3.toString())
                             putExtra("name" , FirstName.text.toString() )
                             putExtra("age" , age.text.toString())
                         putExtra("image" , selectedImageUri.toString())

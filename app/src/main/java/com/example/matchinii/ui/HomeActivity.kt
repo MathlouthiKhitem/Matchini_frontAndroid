@@ -50,8 +50,7 @@ class HomeActivity : AppCompatActivity() {
         val s = intent.getStringExtra("value")
         ageIntent = intent.getStringExtra("age")
         imageIntent = intent.getStringExtra("image")
-        // editProfile = findViewById(R.id.floatingActionButton)
-        //    editProfile.setOnClickListener(){}
+
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrolled(
                 position: Int,

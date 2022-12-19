@@ -39,7 +39,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         loginIntent2 = intent.getStringExtra("login")
-        loginIntentEdit = intent.getStringExtra("login1")
+        loginIntentEdit = intent.getStringExtra("login")
         val map: HashMap<String, String> = HashMap()
         map["login"] = loginIntent2.toString()
         Log.e("intent de login : " , loginIntent2.toString())

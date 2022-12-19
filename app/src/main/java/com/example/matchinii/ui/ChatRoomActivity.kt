@@ -81,7 +81,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         id2intent =intent.getStringExtra("id2").toString()
         Glide.with(applicationContext).load(imageIntent).into(imageusr)
          user.setText(userName)
-         roomName=intent.getStringExtra("romee")!!
+       /*  roomName=intent.getStringExtra("romee")!!
          val map: HashMap<String, String> = HashMap()
           map["UserM1"] = id1intent.toString()
           map["UserM2"] = id2intent.toString()
@@ -95,7 +95,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
               override fun onFailure(call: Call<Messages>, t: Throwable) {
                   println("failed")
               }
-          })
+          })*/
         roomName=intent.getStringExtra("romee")!!
           var messages = MessagesInterface.create()
         val map3: HashMap<String, String> = HashMap()

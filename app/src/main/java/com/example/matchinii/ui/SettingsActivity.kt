@@ -127,16 +127,45 @@ class SettingsActivity : AppCompatActivity() {
         }
         man.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                man.setChecked(true)
-                woman.setChecked(false)
+                val map: HashMap<String, String> = HashMap()
+                map["Sexe"] = man.isChecked.toString()
+                apiservice.showme(map).enqueue(object :Callback<User>{
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+
+
+                    }
+
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+
+                    }
+
+                })
+
+                man.isChecked = true
+                woman.isChecked = false
             }
         })
         woman.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                woman.setChecked(true)
-                man.setChecked(false)
+                val map: HashMap<String, String> = HashMap()
+                map["Sexe"] = woman.isChecked.toString()
+                apiservice.showme(map).enqueue(object :Callback<User>{
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                        Log.e("3asba", woman.isChecked.toString())
+
+                    }
+
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+
+                    }
+
+                })
+
+                man.isChecked = false
+                woman.isChecked = true
             }
         })
+
         /*   rangeSeekBar.setOnRangeSeekBarChangeListener(object : OnRangeSeekBarChangeListener() {
                fun onRangeSeekBarValuesChanged(bar: RangeSeekBar?, minValue: Any, maxValue: Any) {
                    age_rnge.setText("$minValue-$maxValue")

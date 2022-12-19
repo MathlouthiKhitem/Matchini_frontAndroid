@@ -10,7 +10,7 @@
     android:orientation="vertical"
     >
 
-    <!--<include layout="@layout/layout_top_navigation_back"/>-->
+
 
 
     <ScrollView

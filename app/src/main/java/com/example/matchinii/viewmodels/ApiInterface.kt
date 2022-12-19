@@ -63,13 +63,15 @@ interface ApiInterface {
      fun deleteAcc(@Path("login") login:String ):Call<User>
     @POST("/user/getOne")
     fun getOne(@Body map: HashMap<String, String>):Call<User>
+    @POST("/user/showme")
+    fun showme(@Body map: HashMap<String, String>):Call<User>
 // @POST("/Message/addmessage")
 // fun addmessage(@Body map: HashMap<String, String>):Call<User>
     companion object {
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://192.168.1.14:9090")
+                .baseUrl("http://192.168.1.44:9090")
                 .build()
             return retrofit.create(ApiInterface::class.java)
         }

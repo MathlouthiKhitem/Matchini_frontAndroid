@@ -46,7 +46,7 @@ class MyAdapter(private val context: HomeActivity, private val myUserArray: Arra
        val login = model.login
         val firstname = model.FirstName
         val age = model.Age
-        val url = URL(image)
+      //  val url = URL(image)
         val a:Int=0
         val like = view.imageView2
         view.textView3.text = age.toString();
