@@ -17,7 +17,7 @@ interface MessagesInterface {
         fun create() : MessagesInterface{
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://192.168.1.15:3000")
+                .baseUrl("http://192.168.1.12:3000")
                 .build()
             return retrofit.create(MessagesInterface::class.java)
         }

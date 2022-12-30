@@ -16,6 +16,16 @@
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <queries>
+        <intent>
+            <action android:name="com.huawei.hms.core.aidlservice" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -31,7 +41,7 @@
         android:theme="@style/Theme.Matchinii"
         tools:targetApi="31">
         <activity
-            android:name=".Mainmatched"
+            android:name=".ui.MapActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -46,13 +56,6 @@
         </activity>
         <activity
             android:name=".ui.maindislike"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.Home2"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -97,14 +100,9 @@
              project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
              "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC2eG4CLLeVVv6GafcH5yANksddnrM8XIE" />
 
-        <activity
-            android:name=".ui.MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
+
+
         <activity
             android:name=".ui.EmailVerifcationActivity"
             android:exported="false">
@@ -167,6 +165,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <meta-data
+            android:name="com.huawei.hms.client.channel.androidMarket"
+            android:value="false" />
     </application>
 
 </manifest>

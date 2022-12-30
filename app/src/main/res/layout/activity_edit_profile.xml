@@ -26,163 +26,11 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="9dp"
                     android:background="@android:color/transparent"
 
                     android:orientation="vertical"
                     android:visibility="visible">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="10">
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="260dp"
-                            android:layout_weight="4"
-                            app:cardCornerRadius="4dp"
-                            app:cardElevation="4dp"
-                            app:cardUseCompatPadding="true">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_centerInParent="true"
-                                    android:elevation="20dp"
-                                    android:text="1"
-                                    android:textColorLink="#FFD2B6"
-                                    android:textSize="60dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/image_view_1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="fitXY" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:elevation="5dp" />
-
-                                <Button
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:background="@drawable/ic_add_circle_black_24dp"
-                                    android:elevation="5dp"
-                                    android:foreground="@drawable/ic_add_circle_black_24dp"
-                                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="6"
-                            android:orientation="vertical">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="130dp"
-                                app:cardCornerRadius="4dp"
-                                app:cardElevation="4dp"
-                                app:cardUseCompatPadding="true">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerInParent="true"
-                                        android:text="2"
-                                        android:textSize="60dp"
-                                        android:textColorLink="#FFD2B6"
-                                        android:textStyle="bold" />
-
-                                    <ImageView
-                                        android:id="@+id/image_view_2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:scaleType="fitXY" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_alignParentBottom="true"
-                                        android:elevation="5dp">
-
-                                        <Button
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:background="@drawable/ic_add_circle_black_24dp"
-                                            android:elevation="5dp"
-                                            android:foreground="@drawable/ic_add_circle_black_24dp"
-                                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-                                    </LinearLayout>
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="130dp"
-                                app:cardCornerRadius="4dp"
-                                app:cardElevation="4dp"
-                                app:cardUseCompatPadding="true">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerInParent="true"
-                                        android:textColorLink="#FFD2B6"
-                                        android:text="3"
-                                        android:textSize="60dp"
-                                        android:textStyle="bold" />
-
-                                    <ImageView
-                                        android:id="@+id/image_view_3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:scaleType="fitXY" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_alignParentBottom="true"
-                                        android:elevation="5dp">
-
-                                        <Button
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:background="@drawable/ic_add_circle_black_24dp"
-                                            android:elevation="5dp"
-                                            android:foreground="@drawable/ic_add_circle_black_24dp"
-                                            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
-                                    </LinearLayout>
-                                </RelativeLayout>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </LinearLayout>
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -205,104 +53,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
-                                    android:textColorLink="#FFD2B6"
-                                    android:text="4"
-                                    android:textSize="60dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/image_view_4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="fitXY" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:elevation="5dp">
-
-                                    <Button
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:background="@drawable/ic_add_circle_black_24dp"
-                                        android:elevation="5dp"
-                                        android:foreground="@drawable/ic_add_circle_black_24dp"
-                                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
-
-                                </LinearLayout>
-                            </RelativeLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="130dp"
-                            android:layout_weight="1"
-                            android:elevation="5dp"
-                            app:cardCornerRadius="4dp"
-                            app:cardUseCompatPadding="true">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <TextView
-                                    android:id="@+id/text_view_5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:textColorLink="#FFD2B6"
-                                    android:scaleType="fitXY"
-                                    android:text="5"
-                                    android:textSize="60dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/image_view_5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="fitXY" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:elevation="5dp">
-
-                                    <Button
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:background="@drawable/ic_add_circle_black_24dp"
-                                        android:elevation="5dp"
-                                        android:foreground="@drawable/ic_add_circle_black_24dp"
-                                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-                                </LinearLayout>
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="130dp"
-                            android:layout_weight="1"
-                            android:elevation="5dp"
-                            app:cardCornerRadius="4dp"
-                            app:cardUseCompatPadding="true">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
                                     android:text="6"
-                                    android:textSize="60dp"
                                     android:textColorLink="#FFD2B6"
+                                    android:textSize="60dp"
                                     android:textStyle="bold" />
 
                                 <ImageView
@@ -353,16 +106,20 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inpoutAbout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColorHighlight="#CEEC766D"
                         android:textColorLink="#CEEC766D"
                         app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="#CEEC766D"
+                        app:endIconTint="#CEEC766D"
+                        app:hintTextColor="#CEEC766D"
+                        app:startIconTint="#CEEC766D"
                         tools:ignore="TouchTargetSizeCheck">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/EAbout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:hint="Write something about you "
                             android:textColor="#070707"
@@ -377,11 +134,15 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inpoutJobTile"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColorHighlight="#CEEC766D"
                         android:textColorLink="#CEEC766D"
 
                         app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="#CEEC766D"
+                        app:endIconTint="#CEEC766D"
+                        app:hintTextColor="#CEEC766D"
+                        app:startIconTint="#CEEC766D"
                         tools:ignore="TouchTargetSizeCheck">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -400,12 +161,16 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inpoutLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColorHighlight="#CEEC766D"
                         android:textColorLink="#CEEC766D"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
 
                         app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="#CEEC766D"
+                        app:endIconTint="#CEEC766D"
+                        app:hintTextColor="#CEEC766D"
+                        app:startIconTint="#CEEC766D"
                         tools:ignore="TouchTargetSizeCheck">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -423,10 +188,14 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inpoutFirstName"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColorHighlight="#CEEC766D"
                         android:textColorLink="#CEEC766D"
                         app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="#CEEC766D"
+                        app:endIconTint="#CEEC766D"
+                        app:hintTextColor="#CEEC766D"
+                        app:startIconTint="#CEEC766D"
                         tools:ignore="TouchTargetSizeCheck">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -445,10 +214,14 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inpoutAge"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColorHighlight="#CEEC766D"
                         android:textColorLink="#CEEC766D"
                         app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="#CEEC766D"
+                        app:endIconTint="#CEEC766D"
+                        app:hintTextColor="#CEEC766D"
+                        app:startIconTint="#CEEC766D"
                         tools:ignore="TouchTargetSizeCheck">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -473,6 +246,10 @@
 
                         android:textColorLink="#CEEC766D"
                         app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="#CEEC766D"
+                        app:endIconTint="#CEEC766D"
+                        app:hintTextColor="#CEEC766D"
+                        app:startIconTint="#CEEC766D"
                         tools:ignore="TouchTargetSizeCheck">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -497,7 +274,11 @@
                         android:textColorHighlight="#CEEC766D"
                         android:textColorLink="#CEEC766D"
                         app:boxBackgroundColor="@android:color/transparent"
-                        tools:ignore="TouchTargetSizeCheck" >
+                        app:boxStrokeColor="#CEEC766D"
+                        app:endIconTint="#CEEC766D"
+                        app:hintTextColor="#CEEC766D"
+                        app:startIconTint="#CEEC766D"
+                        tools:ignore="TouchTargetSizeCheck">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Eschool"
@@ -569,23 +350,25 @@
                             android:background="@drawable/ic_check_unselect"
                             android:foreground="@drawable/ic_check_unselect"
                             android:visibility="visible"
+                            app:backgroundTint="#FF5252"
                             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="90dp">
 
 
                         <Button
                             android:id="@+id/Save"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#57E53E5E"
                             android:shadowRadius="30"
                             android:text="@string/saveyo"
-                            android:textSize="20dp"
-                            android:backgroundTint="#57E53E5E"
                             android:textColor="@color/black"
+                            android:textSize="20dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

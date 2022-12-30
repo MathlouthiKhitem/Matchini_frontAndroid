@@ -37,18 +37,11 @@ class ForgotPasswordActivity : AppCompatActivity() {
         var services = ApiInterface.create()
         fun validate(): Boolean {
             emaillayout!!.error = null
-
             passwordlayout!!.error = null
-
-
-
             if (emailtext?.text!!.isEmpty()){
                 emaillayout!!.error = getString(R.string.mustNotBeEmpty)
                 return false
             }
-
-
-
             if (passwordtext?.text!!.isEmpty()) {
                 passwordlayout!!.error = getString(R.string.mustNotBeEmpty)
                 return false

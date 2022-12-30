@@ -14,18 +14,26 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-157dp">
 
-        <ImageView
-            android:id="@+id/profilepicsignup"
-            android:layout_width="wrap_content"
-            android:layout_height="123dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="174dp"
+            android:layout_height="158dp"
             android:layout_marginTop="70dp"
-            android:layout_marginBottom="6dp"
-            android:contentDescription="@string/todo"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="90dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/profilepicsignup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/todo"
+                app:srcCompat="@drawable/user" />
+        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -167,13 +175,13 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/black"
-                    app:startIconDrawable="@drawable/ic_baseline_email_24">
+                    app:startIconDrawable="@drawable/ic_baseline_date_range_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edittextage"
                         android:layout_width="296dp"
                         android:layout_height="62dp"
-                        android:inputType="number|textPassword"
+                        android:inputType="number"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:boxStrokeColor="@color/black"

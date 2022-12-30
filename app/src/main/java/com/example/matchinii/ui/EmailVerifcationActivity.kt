@@ -15,6 +15,7 @@ import retrofit2.Response
 lateinit var button : Button
 lateinit var email_input : TextInputEditText
 lateinit var email_input_layout : TextInputLayout
+lateinit var ancientPasswordLayout:TextInputLayout
 var services = ApiInterface.create()
 class EmailVerifcationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +23,11 @@ class EmailVerifcationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_email_verifcation)
         button = findViewById(R.id.mailverifbtn)
         email_input = findViewById(R.id.ancientPasswordEditText)
+        ancientPasswordLayout=findViewById(R.id.ancientPasswordLayout)
         email_input_layout = findViewById(R.id.ancientPasswordLayout)
         val fragment2 = CodeFragment()
         button.setOnClickListener(){
-
+            email_input_layout.error=null
             if (email_input.text!!.isEmpty()){
                 email_input_layout.error = getString(R.string.mustNotBeEmpty)
             } else {

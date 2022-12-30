@@ -22,7 +22,6 @@ import retrofit2.Response
 
 lateinit var login : TextView
 lateinit var pwd : TextView
-
 private var appbar : BottomAppBar? = null
 private var loginIntent: String? = null
 private var imageIntent: String? = null
@@ -135,7 +134,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.home -> {
-                    startActivity(Intent(this@HomeActivity, MapsActivity ::class.java).apply {
+                    startActivity(Intent(this@HomeActivity, MapActivity ::class.java).apply {
                         putExtra("login" , loginIntent)
                     })
                     true

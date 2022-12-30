@@ -2,14 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="130dp"
+    android:layout_width="match_parent"
     android:layout_height="130dp"
     android:layout_marginTop="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="131dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="2dp"
+        android:layout_width="412dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,10 +22,10 @@
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="73dp"
+                android:layout_width="173dp"
                 android:layout_height="18dp"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="30dp"
                 android:text="TextView"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -37,12 +36,12 @@
             android:id="@+id/imageCardView"
             android:layout_width="92dp"
             android:layout_height="93dp"
-            android:layout_marginBottom="30dp"
-            app:cardCornerRadius="55dp"
+            android:layout_marginStart="5dp"
+            app:cardCornerRadius="50dp"
             app:cardPreventCornerOverlap="false"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/userProfileImage"

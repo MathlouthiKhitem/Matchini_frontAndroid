@@ -29,7 +29,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
         val map: HashMap<String, String> = HashMap()
         var loginIntent= intent.getStringExtra("login" )
-        laoutmanager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL ,false)
+        laoutmanager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL ,false)
         map["login"] = loginIntent.toString()
         Log.e("login chat",loginIntent.toString())
         apiservice.getId(map).enqueue(object :Callback<data>{

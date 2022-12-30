@@ -71,7 +71,7 @@ interface ApiInterface {
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://192.168.1.15:9090")
+                .baseUrl("http://192.168.1.12:9090")
                 .build()
             return retrofit.create(ApiInterface::class.java)
         }

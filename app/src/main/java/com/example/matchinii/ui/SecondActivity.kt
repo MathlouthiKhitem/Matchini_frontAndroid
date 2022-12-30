@@ -5,6 +5,7 @@ import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.ContentUris
 import android.content.Context
 import android.content.DialogInterface
@@ -35,6 +36,7 @@ import com.example.matchinii.viewmodels.ApiInterface
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -51,6 +53,7 @@ class SecondActivity : AppCompatActivity() {
     lateinit var txtLayoutLoginup: TextInputLayout
     lateinit var txtPasswordup: TextInputEditText
     lateinit var txtLayoutPasswordup: TextInputLayout
+    lateinit var textinputlayoutage:TextInputLayout
     private var permissionsToRequest: ArrayList<String>? = null
     private val permissionsRejected: ArrayList<String> = ArrayList()
     private val permissions: ArrayList<String> = ArrayList()
@@ -74,98 +77,99 @@ class SecondActivity : AppCompatActivity() {
         txtLoginup = findViewById(R.id.EditEmail)
         txtLayoutLoginup = findViewById(R.id.layoutEmail)
         txtPasswordup = findViewById(R.id.EditPassword)
+        textinputlayoutage=findViewById(R.id.textinputlayoutage)
         txtLayoutPasswordup = findViewById(R.id.LayoutPassword)
         age=findViewById(R.id.edittextage)
-            // checkPermissionWRITE_EXTERNAL_STORAGE(this)
+        // checkPermissionWRITE_EXTERNAL_STORAGE(this)
         //txtPasswordRep = findViewById(R.id.EditRestPassword)
-       // txtLayoutPasswordRep = findViewById(R.id.LayoutRestPassword)
+        // txtLayoutPasswordRep = findViewById(R.id.LayoutRestPassword)
 
         register_btn = findViewById(R.id.nextbtn)
 
-            Profile = findViewById(R.id.profilepicsignup)
+        Profile = findViewById(R.id.profilepicsignup)
         askPermissions();
-                Profile!!.setOnClickListener {
-                  //  if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                 //       ActivityCompat.requestPermissions(this,  arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1);
-                //    }
+        Profile!!.setOnClickListener {
+            //  if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            //       ActivityCompat.requestPermissions(this,  arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1);
+            //    }
 
 
-                    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-                    intent.type = "image/*"
-                    startForResultOpenGallery.launch(intent)
-                    Log.e("image", selectedImageUri.toString())
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.type = "image/*"
+            startForResultOpenGallery.launch(intent)
+            Log.e("image", selectedImageUri.toString())
 
-            }
-            register_btn.setOnClickListener {
+        }
+        register_btn.setOnClickListener {
 
-                val map: HashMap<String, String> = HashMap()
-                map["login"] = txtLoginup.text.toString()
-                map["password"] = txtPasswordup.text.toString()
-                map["Image"] = selectedImageUri.toString()
-                map["Age"] = age.text.toString()
-                Log.e("map", map.toString());
+            val map: HashMap<String, String> = HashMap()
+            map["login"] = txtLoginup.text.toString()
+            map["password"] = txtPasswordup.text.toString()
+            map["Image"] = selectedImageUri.toString()
+            map["Age"] = age.text.toString()
+            Log.e("map", map.toString());
 
-                val mBitmap = BitmapFactory.decodeFile(
-                    getPathFromUri(
-                        this.applicationContext,
-                        selectedImageUri!!
-                    )
+            val mBitmap = BitmapFactory.decodeFile(
+                getPathFromUri(
+                    this.applicationContext,
+                    selectedImageUri!!
                 )
+            )
 
-                val file = File(getPathFromUri(this.applicationContext, selectedImageUri!!))
-                val bos = ByteArrayOutputStream()
-                mBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos)
-                val bitmapdata = bos.toByteArray()
+            val file = File(getPathFromUri(this.applicationContext, selectedImageUri!!))
+            val bos = ByteArrayOutputStream()
+            mBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos)
+            val bitmapdata = bos.toByteArray()
 
-                    //  val out: OutputStream? = contentResolver.openOutputStream(file)
-                val fos = FileOutputStream(file)
-               fos.write(bitmapdata)
-               fos.flush()
-               fos.close()
-                Log.e(
-                    "////////////////// ",
-                    getPathFromUri(this.applicationContext, selectedImageUri!!).toString()
-                )
-                // val mBitmap = BitmapFactory.decodeFile(getPathFromUri(this.applicationContext, selectedImageUri!!));
-                if (validate()) {
-                    val reqfile = RequestBody.create(MediaType.parse("image/*"), file)
-                    val body = MultipartBody.Part.createFormData("Image", getName(getPathFromUri(this.applicationContext, selectedImageUri!!)), reqfile)
-                    val name = RequestBody.create(MediaType.parse("text/plain"), "Image")
-                    var loginbody =
-                        MultipartBody.Part.createFormData("login", txtLoginup.text.toString())
-                    var passwordbody =
-                        MultipartBody.Part.createFormData("password", txtPasswordup.text.toString())
-                    var Agebody = MultipartBody.Part.createFormData("Age", age.text.toString())
+            //  val out: OutputStream? = contentResolver.openOutputStream(file)
+            val fos = FileOutputStream(file)
+            fos.write(bitmapdata)
+            fos.flush()
+            fos.close()
+            Log.e(
+                "////////////////// ",
+                getPathFromUri(this.applicationContext, selectedImageUri!!).toString()
+            )
+            // val mBitmap = BitmapFactory.decodeFile(getPathFromUri(this.applicationContext, selectedImageUri!!));
+            if (validate()) {
+                val reqfile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                val body = MultipartBody.Part.createFormData("Image", getName(getPathFromUri(this.applicationContext, selectedImageUri!!)), reqfile)
+                val name = RequestBody.create("text/plain".toMediaTypeOrNull(), "Image")
+                var loginbody =
+                    MultipartBody.Part.createFormData("login", txtLoginup.text.toString())
+                var passwordbody =
+                    MultipartBody.Part.createFormData("password", txtPasswordup.text.toString())
+                var Agebody = MultipartBody.Part.createFormData("Age", age.text.toString())
 
-                    Log.e("hhhhhhhh ",getName(selectedImageUri.toString())!! )
-                    services.register(loginbody, passwordbody, Agebody, body, name)
-                        .enqueue(object : Callback<User> {
-                            override fun onResponse(call: Call<User>, response: Response<User>) {
-                                val user = response.body()
-                                if (user != null) {
-                                    val intent = Intent(
-                                        this@SecondActivity, HomeActivity::class.java
-                                    ).apply {
-                                        putExtra("login", txtLoginup.text.toString()).apply {
-                                            putExtra("age", age.text.toString())
-                                            putExtra("image", selectedImageUri.toString())
-                                        }
+                Log.e("hhhhhhhh ",getName(selectedImageUri.toString())!! )
+                services.register(loginbody, passwordbody, Agebody, body, name)
+                    .enqueue(object : Callback<User> {
+                        override fun onResponse(call: Call<User>, response: Response<User>) {
+                            val user = response.body()
+                            if (user != null) {
+                                val intent = Intent(
+                                    this@SecondActivity, EditProfileActivity::class.java
+                                ).apply {
+                                    putExtra("login", txtLoginup.text.toString()).apply {
+                                        putExtra("age", age.text.toString())
+                                        putExtra("image", selectedImageUri.toString())
                                     }
-                                    startActivity(intent)
-                                    finish()
-                                } else {
                                 }
+                                startActivity(intent)
+                                finish()
+                            } else {
                             }
-                            override fun onFailure(call: Call<User>, t: Throwable) {
-                                Log.e("-----------call", t.toString())
-                                Toast.makeText(
-                                    this@SecondActivity,
-                                    "Connexion error!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        })
-                }
+                        }
+                        override fun onFailure(call: Call<User>, t: Throwable) {
+                            Log.e("-----------call", t.toString())
+                            Toast.makeText(
+                                this@SecondActivity,
+                                "Connexion error!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+            }
 
         }
     }
@@ -179,14 +183,18 @@ class SecondActivity : AppCompatActivity() {
     private fun validate(): Boolean {
         txtLayoutLoginup.error = null
         txtLayoutPasswordup.error = null
-
+        textinputlayoutage.error=null
 
         if (!Patterns.EMAIL_ADDRESS.matcher(txtLoginup.text.toString()).matches()){
             txtLayoutLoginup.error = getString(R.string.mustNotBeEmpty)
             return false
         }
-        if (txtPasswordup.text!!.isEmpty()){
-            txtLayoutPasswordup.error = getString(R.string.mustNotBeEmpty)
+        if (txtPasswordup.length()<5){
+            txtLayoutPasswordup.error =  ("Cette Champs est plus 5 caractères")
+            return false
+        }
+        if (age.text!!.isEmpty()){
+            textinputlayoutage.error = getString(R.string.mustNotBeEmpty)
             return false
         }
         return true
@@ -361,7 +369,7 @@ class SecondActivity : AppCompatActivity() {
                         "External storage", context,
                         Manifest.permission.READ_EXTERNAL_STORAGE ,
 
-                    )
+                        )
                 } else {
                     ActivityCompat
                         .requestPermissions(
@@ -450,5 +458,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
 }
+
+
 
 
