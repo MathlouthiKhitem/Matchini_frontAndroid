@@ -18,14 +18,18 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="173dp"
                 android:layout_height="18dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="55dp"
                 android:text="TextView"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -36,7 +40,7 @@
             android:id="@+id/imageCardView"
             android:layout_width="92dp"
             android:layout_height="93dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="40dp"
             app:cardCornerRadius="50dp"
             app:cardPreventCornerOverlap="false"
             app:layout_constraintBottom_toBottomOf="parent"

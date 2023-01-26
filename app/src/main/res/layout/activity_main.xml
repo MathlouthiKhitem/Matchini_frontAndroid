@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/brown_and_white__modern_travel_app_user_interface"
-    tools:context=".ui.MainActivity" />
+    tools:context=".ui.Activities.MainActivity" />

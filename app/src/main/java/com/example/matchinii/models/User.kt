@@ -23,4 +23,8 @@ data class User (
     var Image: String,
     @SerializedName("Matches")
     var Matches: String,
+    @SerializedName("longitude")
+    var longitude: String,
+    @SerializedName("latitude")
+    var latitude: String,
 )

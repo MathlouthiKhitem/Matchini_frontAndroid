@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/brown_and_white__modern_travel_app_user_interface__2_"
-    tools:context=".ui.HomeActivity">
+    tools:context=".ui.Activities.HomeActivity">
 
     <include
         android:id="@+id/include2"

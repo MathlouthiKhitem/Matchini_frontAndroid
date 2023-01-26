@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.ProfileActivity">
+    tools:context=".ui.Activities.ProfileActivity">
     <!-- top navigation -->
 
 
@@ -25,7 +25,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.example.matchinii.ui.PulsatorLayout
+            <com.example.matchinii.ui.Activities.PulsatorLayout
                 android:id="@+id/pulsator"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
@@ -46,7 +46,7 @@
                     android:src="@drawable/monkey"
                     app:civ_border_color="#CEEC766D"
                     app:civ_border_width="2dp" />
-            </com.example.matchinii.ui.PulsatorLayout>
+            </com.example.matchinii.ui.Activities.PulsatorLayout>
 
             <TextView
                 android:id="@+id/profile_name"
